@@ -72,7 +72,7 @@ start_manager();
 
 function View_Products() {
     // connection = new connection;
-    connection.query("select * from products", function (error, result) {
+    connection.query("select item_id,product_name,department_name,price,stock_quantity from products", function (error, result) {
         if (error) throw error;
         var table = [];
         var row = []
@@ -151,7 +151,7 @@ function inq_v_low_inv() {
 
 function View_Low_Inv(num) {
 
-    var query = "select * from products where stock_quantity < ?";
+    var query = "select item_id,product_name,department_name,price,stock_quantity from products where stock_quantity < ?";
     // var query = "select * from products where stock_quantity < 500";
     connection.query(query, num, function (error, result) {
         // connection_view_low.query(query, function (error, result) {
@@ -205,7 +205,7 @@ function View_Low_Inv(num) {
         });
         for (var i = 0; i < result.length; i++) {
             displayTable.push(
-                [result[i].item_id, result[i].product_name, result[i].department_name, result[i].price, result[i].stock_quantity]
+                [result[i].item_id, result[i].product_name, result[i].department_name, result[i].price,result[i].stock_quantity ]
             );
         }
         console.log(displayTable.toString());
@@ -359,4 +359,11 @@ function add_new() {
 
     });
 
+}
+function if_null_return_zero(if_null){
+    if(if_null == null){
+        return 0;
+    }else{
+        return if_null;
+    }
 }

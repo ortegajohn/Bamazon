@@ -144,6 +144,7 @@ function query_quant_w_id(id, quant) {
 
         } else {
             console.log('Insufficient quantity!')
+            connection.end();
         }
 
         // connection.end();
@@ -187,11 +188,11 @@ function update_product_sales(id,total){
         if (error) throw error;
         
         if(res[0].product_sales == null){
-            console.log("res[0]: ",res[0].product_sales)
+            // console.log("res[0]: ",res[0].product_sales)
             updated_w_id(id, total)
 
         }else{
-            console.log("Not Null res[0]: ",res[0].product_sales)
+            // console.log("Not Null res[0]: ",res[0].product_sales)
             product_sales_w_id(id,total)
         }
 
@@ -214,7 +215,7 @@ function updated_w_id(index_to_update, add_to_inv) {
         ],
         function (err, res) {
             if (err) throw err;
-            console.log(res.affectedRows + " product updated!\n");
+            // console.log(res.affectedRows + " product updated!\n");
             connection.end();
 
         });
@@ -228,7 +229,7 @@ function product_sales_w_id(id,total){
         if (error) throw error;
         var before_total = res[0].product_sales;
         var new_total = total + before_total;
-        console.log("new_total: ",new_total)
+        // console.log("new_total: ",new_total)
         updated_w_id(id, new_total)
     });
 
